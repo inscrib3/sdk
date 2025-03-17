@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+tmp
+**/files/*
+!**/files/.gitkeep
+**/icons/*
+!**/icons/.gitkeep
+.DS_Store
