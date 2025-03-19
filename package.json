@@ -1,8 +1,9 @@
 {
   "name": "@inscrib3/sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
+  "files": ["dist"],
   "exports": {
     ".": {
       "import": "./dist/index.js",
