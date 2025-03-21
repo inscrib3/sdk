@@ -15,8 +15,8 @@ import sdk from '@inscrib3/sdk';
 // Initialize with default API endpoint (https://api.inscrib3.com)
 const inscrib3 = sdk();
 
-// Or initialize with custom API endpoint
-const inscrib3 = sdk('https://your-api-endpoint.com');
+// Initialize with custom Network and Chain (Bitcoin and Fractal are supported)
+const inscrib3 = sdk('signet', 'bitcoin');
 
 // Create a new drop
 const createDrop = async () => {

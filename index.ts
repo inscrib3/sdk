@@ -1,4 +1,8 @@
-const sdk = (api = 'https://api.inscrib3.com') => {
+const sdk = (
+  network: 'mainnet' | 'testnet' | 'testnet4' | 'signet' = 'mainnet',
+  chain: 'bitcoin' | 'fractal' = 'bitcoin',
+  api = 'https://api.inscrib3.com'
+) => {
   return {
     drops: {
       create: async (
@@ -14,7 +18,7 @@ const sdk = (api = 'https://api.inscrib3.com') => {
         signature: string,
       ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
         const formData = new FormData();
         formData.append('icon', icon);
         formData.append('name', name);
@@ -38,7 +42,7 @@ const sdk = (api = 'https://api.inscrib3.com') => {
         signature: string,
       ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
         const data = await fetch(`${api}/drops`, {
           headers
         });
@@ -57,9 +61,14 @@ const sdk = (api = 'https://api.inscrib3.com') => {
         }[] = await data.json();
         return res;
       },
-      read: async (id: string, address: string, message: string, signature: string) => {
+      read: async (
+        id: string,
+        address: string,
+        message: string,
+        signature: string,
+      ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
         const data = await fetch(`${api}/drops/${id}`, { headers });
         const res: {
           name: string,
@@ -75,9 +84,14 @@ const sdk = (api = 'https://api.inscrib3.com') => {
         } = await data.json();
         return res;
       },
-      remove: async (id: string, address: string, message: string, signature: string) => {
+      remove: async (
+        id: string,
+        address: string,
+        message: string,
+        signature: string,
+      ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
         const data = await fetch(`${api}/drops/${id}`, {
           headers,
           method: 'DELETE',
@@ -85,9 +99,18 @@ const sdk = (api = 'https://api.inscrib3.com') => {
         const res: { id: string } = await data.json();
         return res;
       },
-      mint: async (id: string, paymentAddress: string, paymentPublicKey: string, recipientAddress: string, recipientPublicKey: string, address: string, message: string, signature: string) => {
+      mint: async (
+        id: string,
+        paymentAddress: string,
+        paymentPublicKey: string,
+        recipientAddress: string,
+        recipientPublicKey: string,
+        address: string,
+        message: string,
+        signature: string,
+      ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
         headers.append('Content-Type', 'application/json');
         const data = await fetch(`${api}/drops/${id}/mint`, {
           method: 'POST',
@@ -102,9 +125,15 @@ const sdk = (api = 'https://api.inscrib3.com') => {
         const res: { psbt: string[] } = await data.json();
         return res;
       },
-      broadcastMint: async (id: string, signedPsbt: string[], address: string, message: string, signature: string) => {
+      broadcastMint: async (
+        id: string,
+        signedPsbt: string[],
+        address: string,
+        message: string,
+        signature: string,
+      ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
         headers.append('Content-Type', 'application/json');
         const data = await fetch(`${api}/drops/${id}/mint/broadcast`, {
           method: 'POST',
@@ -117,16 +146,27 @@ const sdk = (api = 'https://api.inscrib3.com') => {
         return res;
       },
       uploads: {
-        all: async (id: string, address: string, message: string, signature: string) => {
+        all: async (
+          id: string,
+          address: string,
+          message: string,
+          signature: string,
+        ) => {
           const headers = new Headers();
-          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
           const data = await fetch(`${api}/drops/${id}/uploads`, { headers});
           const res: { files: string[] } = await data.json();
           return res;
         },
-        update: async (id: string, files: File[], address: string, message: string, signature: string) => {
+        update: async (
+          id: string,
+          files: File[],
+          address: string,
+          message: string,
+          signature: string,
+        ) => {
           const headers = new Headers();
-          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
           const formData = new FormData();
           for (const file of files ) {
             formData.append('files', file);
@@ -139,9 +179,15 @@ const sdk = (api = 'https://api.inscrib3.com') => {
           const res: { supply: string } = await data.json();
           return res;
         },
-        remove: async (id: string, files: string[], address: string, message: string, signature: string) => {
+        remove: async (
+          id: string,
+          files: string[],
+          address: string,
+          message: string,
+          signature: string,
+        ) => {
           const headers = new Headers();
-          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${signature}`).toString('base64')}`);
+          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
           headers.append('Content-Type', 'application/json');
           const data = await fetch(`${api}/drops/${id}/uploads`, {
             method: 'DELETE',
