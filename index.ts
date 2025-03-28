@@ -18,7 +18,7 @@ const sdk = (
         signature: string,
       ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
         const formData = new FormData();
         formData.append('icon', icon);
         formData.append('name', name);
@@ -42,7 +42,7 @@ const sdk = (
         signature: string,
       ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
         const data = await fetch(`${api}/drops`, {
           headers
         });
@@ -68,7 +68,7 @@ const sdk = (
         signature: string,
       ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
         const data = await fetch(`${api}/drops/${id}`, { headers });
         const res: {
           name: string,
@@ -91,7 +91,7 @@ const sdk = (
         signature: string,
       ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
         const data = await fetch(`${api}/drops/${id}`, {
           headers,
           method: 'DELETE',
@@ -110,7 +110,7 @@ const sdk = (
         signature: string,
       ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
         headers.append('Content-Type', 'application/json');
         const data = await fetch(`${api}/drops/${id}/mint`, {
           method: 'POST',
@@ -133,7 +133,7 @@ const sdk = (
         signature: string,
       ) => {
         const headers = new Headers();
-        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+        headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
         headers.append('Content-Type', 'application/json');
         const data = await fetch(`${api}/drops/${id}/mint/broadcast`, {
           method: 'POST',
@@ -153,7 +153,7 @@ const sdk = (
           signature: string,
         ) => {
           const headers = new Headers();
-          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
           const data = await fetch(`${api}/drops/${id}/uploads`, { headers});
           const res: { files: string[] } = await data.json();
           return res;
@@ -166,7 +166,7 @@ const sdk = (
           signature: string,
         ) => {
           const headers = new Headers();
-          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
           const formData = new FormData();
           for (const file of files ) {
             formData.append('files', file);
@@ -187,7 +187,7 @@ const sdk = (
           signature: string,
         ) => {
           const headers = new Headers();
-          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}${signature}`).toString('base64')}`);
+          headers.append('Authorization', `Basic ${Buffer.from(`${address}:${message}:${network}:${chain}:${signature}`).toString('base64')}`);
           headers.append('Content-Type', 'application/json');
           const data = await fetch(`${api}/drops/${id}/uploads`, {
             method: 'DELETE',
