@@ -122,7 +122,7 @@ const sdk = (
             recipientPublicKey,
           }),
         });
-        const res: { psbt: string[] } = await data.json();
+        const res: { psbt: string[], indexToSign: number[][] } = await data.json();
         return res;
       },
       broadcastMint: async (
